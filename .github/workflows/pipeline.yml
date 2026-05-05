@@ -2,8 +2,8 @@ name: Data Pipeline
 
 on:
   schedule:
-    - cron: '0 8 * * 1'  # Every Monday at 8 AM
-  workflow_dispatch:     # Allow manual runs
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
 
 jobs:
   run-pipeline:
@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4   # ✅ updated
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5   # ✅ updated
         with:
           python-version: '3.10'
 
@@ -24,8 +24,8 @@ jobs:
       - name: Run pipeline
         run: python scripts/report.py
 
-      - name: Upload report artifact
+      - name: Upload report
         uses: actions/upload-artifact@v4
         with:
           name: report
-          path: output/report.csv# This is a basic workflow to help you get started with Actions
+          path: output/report.csv
